@@ -1,6 +1,9 @@
 import WebSocket from "ws";
 import { exec } from "child_process";
 
+const RUNS = 1;
+const CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 `~!@#$%^&*()-_=+[]{}\\|;:'\",.<>/?"; 
+
 console.log("Запускаем Java-сервер: npm run javas...");
 
 exec("npm run javas", (err, stdout, stderr) => {
@@ -16,11 +19,14 @@ const ws = new WebSocket("ws://localhost:3031");
 ws.on("open", async () => {
   console.log("WebSocket подключен. Начинаем тест...");
 
-  for (let i = 0; i < 100; i++) {
-    ws.send(JSON.stringify({
-      type: "click",
-      word: `${i} - ${Buffer.from((Math.random() * 100000).toFixed(0)).toString('base64')}`,
-      pressEnter: true
-    }));
+  for (let run = 1; run <= RUNS; run++) {
+    console.log(`=== Прогон ${run} ===`);
+    for (let i = 0; i < CHARS.length; i++) {
+      ws.send(JSON.stringify({
+        type: "click",
+        word: CHARS[i],
+        pressEnter: false
+      }));
+    }
   }
 });
