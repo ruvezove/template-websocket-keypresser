@@ -1,0 +1,22 @@
+{
+  "name": "template-websocket-keypresser",
+  "version": "1.0.0",
+  "description": "Простой WebSocket сервер на Java, написанный ChatGPT, который нажимает клавиши, которые поступают ему командами на вебсокет. Для теста используется Node.js.",
+  "main": "index.js",
+  "scripts": {
+    "javab": "javac -cp \".;lib/*\" WsKeyPresser.java",
+    "javas": "java -cp \".;lib/*\" WsKeyPresser",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "keypresser",
+    "chatgpt",
+    "websocket",
+    "template"
+  ],
+  "author": "Ruve Zove",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "ws": "^8.18.3"
+  }
+}
